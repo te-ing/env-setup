@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import './EnvSetup.css';
+import Preset from './Preset';
 
 export default function EnvSetup() {
   const [envPath, setEnvPath] = useState(
@@ -21,6 +22,7 @@ export default function EnvSetup() {
           Choose File
         </label>
       </div>
+      <Preset />
     </div>
   );
 }
