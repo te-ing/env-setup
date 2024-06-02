@@ -4,11 +4,6 @@
   gap: 12px;
 }
 
-.addBtn {
-  width: fit-content;
-  height: fit-content;
-}
-
 .itemWrapper {
   display: flex;
   position: relative;
@@ -36,7 +31,7 @@
 
   .editBtn {
     position: absolute;
-    right: 4px;
+    right: 40px;
     top: 12px;
     font-size: 12px;
     border: 1px solid lightgray;
@@ -45,6 +40,58 @@
     height: fit-content;
   }
   .editBtn:hover {
-    transform: scale(1.05);
+    transform: scale(1.2);
+    background-color: rgb(212, 245, 255);
+    border-color: white;
+  }
+
+  .deleteBtn {
+    position: absolute;
+    right: 4px;
+    top: 12px;
+    font-size: 12px;
+    border: 1px solid lightgray;
+    padding: 4px 8px;
+    width: fit-content;
+    height: fit-content;
+  }
+  .deleteBtn:hover {
+    transform: scale(1.2);
+    background-color: rgb(255, 203, 203);
+    border-color: white;
+  }
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 50px;
+}
+.editWrapper {
+  display: flex;
+  gap: 12px;
+}
+.editItem {
+  display: flex;
+  border-radius: 6px;
+  background-color: white;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 50px;
+  box-shadow:
+    0px 8px 28px -6px rgba(24, 39, 75, 0.12),
+    0px 18px 88px -4px rgba(24, 39, 75, 0.14);
+
+  input {
+    width: 90%;
+    outline: none;
+    border: none;
+    padding: 2px;
+    border-bottom: 1px solid lightgray;
   }
 }
