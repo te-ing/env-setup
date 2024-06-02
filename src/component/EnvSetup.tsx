@@ -22,7 +22,7 @@ export default function EnvSetup() {
           Choose File
         </label>
       </div>
-      <Preset />
+      <Preset envPath={envPath} />
     </div>
   );
 }

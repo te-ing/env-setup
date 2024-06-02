@@ -7,7 +7,7 @@ type TPreset = {
   title: string;
   content: string;
 };
-export default function Preset() {
+export default function Preset({ envPath }: { envPath: string }) {
   const storagePreset: TPreset[] = JSON.parse(
     localStorage.getItem('preset') || '[]',
   );
@@ -72,13 +72,28 @@ export default function Preset() {
     );
     setPreset((prev) => prev.filter((v) => v.id !== id));
   };
+  const selectPreset = (id: number) => {
+    try {
+      const target = preset.find((v) => v.id === id);
+      console.log(target?.content);
+      if (!envPath) return alert('파일을 선택해주세요!');
+      if (!target) return alert('error!');
+      window.electron.ipcRenderer.sendMessage('write-file', [
+        envPath,
+        target?.content || '',
+      ] as any);
+      alert('저장완료');
+    } catch (error) {
+      alert('error!');
+    }
+  };
 
   return (
     <div className="wrapper">
       {preset?.map(({ title, id }) => {
         return (
-          <div className="itemWrapper">
-            <button type="button" onClick={() => {}}>
+          <div className="itemWrapper" key={id}>
+            <button type="button" onClick={() => selectPreset(id)}>
               {title}
             </button>
             <button

@@ -41,6 +41,14 @@ ipcMain.on('read-file', async (event, arg) => {
   event.reply('read-file', target);
 });
 
+ipcMain.on('write-file', async (event, arg) => {
+  console.log("ipcMain.on('read-file')", arg);
+  const target = fs
+    // .readFileSync(path.join(`/Users/te-ing/Desktop/test.env`))
+    .writeFileSync(path.join(arg[0]), arg[1]);
+  event.reply('read-file', target);
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();

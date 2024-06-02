@@ -17,3 +17,8 @@ window.electron.ipcRenderer.on('read-file', async (arg) => {
   console.log(arg);
   return arg;
 });
+
+window.electron.ipcRenderer.on('write-file', async (arg) => {
+  console.log(arg);
+  return arg;
+});
