@@ -54,6 +54,12 @@ const configuration: webpack.Configuration = {
       NODE_ENV: 'production',
     }),
   ],
+
+  devServer: {
+    client: {
+      logging: 'warn',
+    },
+  },
 };
 
 export default configuration;

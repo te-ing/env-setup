@@ -11,3 +11,9 @@ window.electron.ipcRenderer.once('ipc-example', (arg) => {
   console.log(arg);
 });
 window.electron.ipcRenderer.sendMessage('ipc-example', ['ping']);
+
+// calling IPC exposed from preload script
+window.electron.ipcRenderer.on('read-file', async (arg) => {
+  console.log(arg);
+  return arg;
+});

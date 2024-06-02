@@ -12,6 +12,7 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import fs from 'fs';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
@@ -29,6 +30,15 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('read-file', async (event, arg) => {
+  console.log("ipcMain.on('read-file')", arg);
+  const target = fs
+    // .readFileSync(path.join(`/Users/te-ing/Desktop/test.env`))
+    .readFileSync(path.join(arg))
+    .toString();
+  event.reply('read-file', target);
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -71,6 +81,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
+    x: 1000, // tmp
+    y: 200, // tmp
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),
