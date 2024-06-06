@@ -126,7 +126,7 @@ export default function Preset({ envPath }: { envPath: string }) {
               onChange={(v) => setEditTitle(v.target.value)}
               value={editTitle}
             />
-            <input
+            <textarea
               placeholder="env value"
               onChange={(v) => setEditContent(v.target.value)}
               value={editContent}

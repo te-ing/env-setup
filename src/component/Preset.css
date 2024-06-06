@@ -94,4 +94,13 @@
     padding: 2px;
     border-bottom: 1px solid lightgray;
   }
+
+  textarea {
+    width: 90%;
+    outline: none;
+    border: none;
+    padding: 2px;
+    border-bottom: 1px solid lightgray;
+    resize: none;
+  }
 }
