@@ -35,12 +35,13 @@ button:hover {
   opacity: 1;
 }
 
-.Hello {
+.path {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
   gap: 12px;
+  flex-direction: column;
 
   input {
     width: 90%;

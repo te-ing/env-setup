@@ -6,6 +6,7 @@ type TPreset = {
   id: number;
   title: string;
   content: string;
+  isSelected: boolean;
 };
 export default function Preset({ envPath }: { envPath: string }) {
   const storagePreset: TPreset[] = JSON.parse(
@@ -15,6 +16,7 @@ export default function Preset({ envPath }: { envPath: string }) {
   const [editId, setEditId] = useState(0);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
+
   const addPreset = () => {
     const key = Date.now() + Math.floor(Math.random() * 999);
     localStorage.setItem(
@@ -24,6 +26,7 @@ export default function Preset({ envPath }: { envPath: string }) {
           id: key,
           title: `Preset ${storagePreset.length + 1}`,
           content: `contetn ${storagePreset.length + 1}`,
+          isSelected: false,
         }),
       ),
     );
@@ -32,6 +35,7 @@ export default function Preset({ envPath }: { envPath: string }) {
         id: key,
         title: `Preset ${storagePreset.length + 1}`,
         content: `contetn ${storagePreset.length + 1}`,
+        isSelected: false,
       }),
     );
   };
@@ -82,18 +86,41 @@ export default function Preset({ envPath }: { envPath: string }) {
         envPath,
         target?.content || '',
       ] as any);
-      alert('저장완료');
+      setPreset((prev) =>
+        prev.map((item) => {
+          return {
+            ...item,
+            isSelected: id === item.id,
+          };
+        }),
+      );
+      localStorage.setItem(
+        'preset',
+        JSON.stringify(
+          storagePreset.map((item) => {
+            return {
+              ...item,
+              isSelected: id === item.id,
+            };
+          }),
+        ),
+      );
+      return alert('저장완료');
     } catch (error) {
-      alert('error!');
+      return alert('error!');
     }
   };
 
   return (
     <div className="wrapper">
-      {preset?.map(({ title, id }) => {
+      {preset?.map(({ title, id, isSelected }) => {
         return (
           <div className="itemWrapper" key={id}>
-            <button type="button" onClick={() => selectPreset(id)}>
+            <button
+              type="button"
+              onClick={() => selectPreset(id)}
+              style={isSelected ? { fontWeight: 'bold', color: '#dd5789' } : {}}
+            >
               {title}
             </button>
             <button
