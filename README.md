@@ -3,7 +3,6 @@
 
 <br />
 
-
 ##### IDE의 빌드환경에 설정한 env 경로를 변경하는 것이 번거로워서 만든 텍스트 편집기 데스크탑 어플리케이션입니다.
 ##### 프리셋 별로 등록된 값을 선택해둔 파일에 덮어씌워줍니다.
 ##### 프리셋을 자유롭게 추가할 수 있으며, 이름을 변경할 수 있습니다.
@@ -27,5 +26,7 @@ npm run package
 ```
 
 ---
+
+https://github.com/te-ing/env-setup/assets/76410985/155bc770-3603-4511-8e6f-23e23d4b73d9
 
 본 프로젝트는 [electron-react-boilerplate](https://electron-react-boilerplate.js.org/)를 기반으로 만들었습니다.
