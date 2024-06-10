@@ -40,7 +40,7 @@ export default function Preset({ envPath }: { envPath: string }) {
     );
   };
 
-  const editPreset = () => {
+  const editConfirm = () => {
     localStorage.setItem(
       'preset',
       JSON.stringify(
@@ -76,10 +76,21 @@ export default function Preset({ envPath }: { envPath: string }) {
     );
     setPreset((prev) => prev.filter((v) => v.id !== id));
   };
+
+  const editPreset = ({ title, id, content }: Partial<TPreset>) => {
+    if (editId !== 0 && id === editId) {
+      // edit 버튼 두번 클릭
+      setEditId(0);
+      return;
+    }
+    setEditId(id || 0);
+    setEditTitle(title || '');
+    setEditContent(content || '');
+  };
+
   const selectPreset = (id: number) => {
     try {
       const target = preset.find((v) => v.id === id);
-      console.log(target?.content);
       if (!envPath) return alert('파일을 선택해주세요!');
       if (!target) return alert('error!');
       window.electron.ipcRenderer.sendMessage('write-file', [
@@ -113,7 +124,7 @@ export default function Preset({ envPath }: { envPath: string }) {
 
   return (
     <div className="wrapper">
-      {preset?.map(({ title, id, isSelected }) => {
+      {preset?.map(({ title, id, content, isSelected }) => {
         return (
           <div className="itemWrapper" key={id}>
             <button
@@ -126,9 +137,7 @@ export default function Preset({ envPath }: { envPath: string }) {
             <button
               className="editBtn"
               type="button"
-              onClick={() =>
-                setEditId((prev) => (prev === 0 || id !== prev ? id : 0))
-              }
+              onClick={() => editPreset({ title, id, content })}
             >
               ✏️
             </button>
@@ -159,7 +168,11 @@ export default function Preset({ envPath }: { envPath: string }) {
               value={editContent}
             />
           </div>
-          <button className="editConfirmBtn" type="button" onClick={editPreset}>
+          <button
+            className="editConfirmBtn"
+            type="button"
+            onClick={editConfirm}
+          >
             📝
           </button>
         </div>
